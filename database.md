@@ -1,4 +1,5 @@
-##数据库设计
+###数据库设计
+
 
 驾校订单部分
 
@@ -41,9 +42,144 @@
 | order_id      | Integer |订单id |
 | amount      | Integer |总额 |
 | payed      | Integer | 已支付金额|
-| create_time      | 创建时间 | |
+| create_time      | datetime |创建时间 |
 | school_id      | Integer | |
 | status     | Integer | |
+
+4.student
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+| id      | Integer | |
+| head_img      | varchar | 头像地址|
+| name      | varchar | |
+| age      | Integer | |
+| sex      | varchar | |
+| idCard     | varchar | |
+| telephone      | varchar | |
+| qq      | varchar | |
+| schedule      | Integer |进度|
+| status      | Integer ||
+
+5.trainer
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+| id      | Integer | |
+| name      | varchar | |
+| head_img      | varchar | |
+| sex      | varchar | |
+| age      | varchar | |
+| telephone      | varchar | |
+| weChat      | varchar | 微信号|
+| licence      | varchar |驾照 |
+| class_id      | Integer | 当前教授的班型|
+| school_id      | Integer |所属驾校id |
+|appointment_status|Integer|预约状态|
+|status|Integer||
+
+6.student_lessen(学生-教练关联表)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|trainer_id|Integer||
+|student_id|Integer||
+|field_id|Integer||
+|schedule|Integer|该学生当前处于哪个科目|
+|class_id|Integer||
+|evaluate|TEXT|学生对教练的评价|
+|evaluate_level|Integer|评价星级|
+
+7.class(班型)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|content|TEXT|班型描述|
+|school_id|Integer|所属驾校id|
+|rule_number|Integer|班型规则|
+|cost|Integer|班型花费|
+
+8.agent
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|name|varchar||
+|telephone|varchar||
+|bank_number|varchar|银行账户|
+|bank_info|varchar|开户银行信息|
+|percentage|Integer|分红数目|
+|reduction|Integer|能提供的优惠金额|
+|inviter_id|Integer|上级代理人id|
+
+9.percentage
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|agent_id|Integer||
+|amount|Integer||
+|rule_id|Integer|分红规则id|
+|create_time|datetime||
+|status|Integer||
+
+10.percentage_rule(分红规则)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|Cycle|Integer|结算周期，单位天|
+|level|Integer|结算上溯等级|
+
+11.finance_record(财务记录)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|account_id|Integer||
+|record_content|varchar||
+|record_type|Integer|操作类型|
+|recode_time|datetime||
+
+12.field
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|name|var||
+|content|TEXT||
+|student_count|Integer||
+|position_x|Double|经纬度-经度|
+|position_y|Double|经纬度-纬度|
+|position|varchar|位置描述|
+
+- - -
+
+
+13.account
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|name|varchar||
+|password|varchar||
+|role_id|Integer||
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
