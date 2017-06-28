@@ -80,7 +80,7 @@
 |appointment_status|Integer|预约状态|
 |status|Integer||
 
-6.student_lessen(学生-教练关联表)
+6.student_lesson(学生-教练关联表)
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
