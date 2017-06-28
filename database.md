@@ -1,7 +1,9 @@
-###数据库设计
+## 数据库设计
 
 
-驾校订单部分
+### 驾校订单部分
+
+- - -
 
 1.driver_school
 
@@ -100,6 +102,7 @@
 |school_id|Integer|所属驾校id|
 |rule_number|Integer|班型规则|
 |cost|Integer|班型花费|
+|cost_content|TEXT|费用明细|
 
 8.agent
 
@@ -157,6 +160,7 @@
 
 - - -
 
+### 后台管理权限部分
 
 13.account
 
@@ -166,6 +170,90 @@
 |name|varchar||
 |password|varchar||
 |role_id|Integer||
+
+14.role
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|name|varchar||
+|role_authority|Integer||
+|role_database_authority||
+
+15.menu
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|name|varchar||
+|database_name|varchar||
+|level|Integer||
+|father_menu_id|Integer||
+
+16.database_authority
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|database_name|varchar||
+|database_level|Integer||
+
+17.role_menu
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|role_id|Integer||
+|menu_id|Integer||
+|authority|Integer||
+
+18.school_settings(内容包括所有需要设置内容)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|school_id|Integer||
+|banner|varchar|banner图地址|
+|school_content|TEXT|驾校介绍|
+|school_acceptance|TEXT|驾校服务承诺
+|school_notice|TEXT|学车须知|
+|text_notice|TEXT|测考锦囊|
+- - -
+
+### 线上测考部分
+
+19.questions
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|belongs|Integer|所属章节（科目x）|
+|domain|varchar|所属领域|
+|right_answer|Integer|正确答案(option)id|
+|content|TEXT|题目描述|
+|type|Integer|单选多选|
+
+20.options
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|question_id|Integer||
+|question_order|Integer|ABCD(1,2,3,4保存)|
+|content|varchar||
+
+21.student_question
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|student_id|Integer||
+|question_id|Integer||
+|type|Integer|收藏OR错题|
+
+
+
+
 
 
 
