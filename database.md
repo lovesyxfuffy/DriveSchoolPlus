@@ -199,7 +199,15 @@
 |database_name|varchar||
 |database_level|Integer||
 
-17.role_menu
+17.role_database
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|role_id|Integer||
+|database_id|Integer||
+
+18.role_menu
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -208,7 +216,7 @@
 |menu_id|Integer||
 |authority|Integer||
 
-18.school_settings(内容包括所有需要设置内容)
+19.school_settings(内容包括所有需要设置内容)
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -223,7 +231,7 @@
 
 ### 线上测考部分
 
-19.questions
+20.questions
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -234,7 +242,7 @@
 |content|TEXT|题目描述|
 |type|Integer|单选多选|
 
-20.options
+21.options
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -243,7 +251,7 @@
 |question_order|Integer|ABCD(1,2,3,4保存)|
 |content|varchar||
 
-21.student_question
+22.student_question
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
