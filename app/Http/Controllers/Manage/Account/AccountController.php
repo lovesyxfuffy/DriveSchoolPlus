@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Manage\Account;
 
-use App\Account;
 use App\Http\Controllers\Controller;
+use App\Model\Manage\Account;
+use APP\Util\ResponseEntity;
+use App\Util\ResponseUtil;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -28,10 +30,9 @@ class AccountController extends Controller
         ]);
         if(!$res)
         {
-            return $this->stdResponse();
+            return ResponseUtil::waring($this->backMeg);
         }
        // Account::where('account')
-
 
     }
 
@@ -40,39 +41,30 @@ class AccountController extends Controller
      | 添加管理员接口
      |--------------------------------------------------------------------------
      */
-
     public function create(Request $request)
     {
         $res = $this->filter($request,[
-            'account'=>'required|unique:user|numeric|digits:12|filled',
+            'account'=>'required|unique:user|filled',
             'password'=>'required|between:6,20|filled',
             'name'=>'required|filled',
         ]);
         if(!$res)
         {
-            return $this->stdResponse();
+            return ResponseEntity::waring($this->backMeg);
         }
-        //验证用户 token
-        if(!$this->check_token($request->input('api_token')))
-        {
-            return $this->stdResponse(-3);
-        }
-
         try{
 
-            $user = new User();
-            $user->schoolnum = $request->input('schoolnum');
-            $user->password = md5($request->input('password')."#".$request->input('schoolnum'));
-            $user->campus = $request->input('campus');
-            $user->realname = $request->input('realname');
-            $user->tel = $request->input('tel');
+            $user = new Account();
+            $user->account = $request->input('account');
+            $user->password = md5($request->input('password')."#".$request->input('account'));
+            $user->name = $request->input('name');
+
+            return $user->save() ? ResponseEntity::result("OK") : ResponseEntity::error("创建失败");
 
         }catch (\Exception $exception){
-            return $this->stdResponse("-4");
+            return ResponseEntity::error("服务器异常");
         }catch (\Error $error){
-            return $this->stdResponse("-12");
+            return ResponseEntity::error("服务器异常");
         }
-        return $this->stdResponse("-6");
     }
-
 }

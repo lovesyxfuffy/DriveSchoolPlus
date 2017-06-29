@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: zhaoshuai
  * Date: 2017/6/29
- * Time: 21:00
+ * Time: 21:02
  */
 
 namespace App\Util;
 
 
-class ResponseEntity
+class ResponseUtil
 {
     static function result($content){
         return response()->json([

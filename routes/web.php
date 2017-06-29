@@ -11,19 +11,13 @@
 |
 */
 
+
+/*
+ * 引入后台管理的路由文件
+ * */
+include "routeManage.php";
+
+
 Route::get('/', function () {
     return view('welcome');
-});
-
-
-
-Route::group(['prefix'=>'/api/manage'],function (){
-
-    Route::group(['prefix'=>'/account'],function (){
-        Route::post('/i/auth',function (){
-            return 1;
-        });
-
-
-    });
 });
