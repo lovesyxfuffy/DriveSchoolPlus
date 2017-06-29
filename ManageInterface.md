@@ -1,4 +1,4 @@
-唐僧商城前后端接口文档
+驾校后台接口文档
 ===================
 ***
 备注:返回内容有如下统一的数据格式:
@@ -17,34 +17,46 @@ code有如下几种情况
 ***
 <br/>
 <br/>
-<br/>
-首页部分
-
+管理员部分
+url前缀: /api/manage/account
 -------
 
-#####  1.获取分类
-url: main/getClassify
+#####  1.管理员账号登录
+url: /api/manage/account/i/auth
 
-method: get
+method: post
 
-request: `{}`
+request: 
+```json
+{
+  "account":"",
+  "password":""
+}
+```
+
+response:
+```json
+
+```
+
+
+#####  2.创建管理员
+url: /api/manage/account/i/info
+
+method: post
+
+request: 
+```json
+{
+  "account":"",
+  "password":""
+}
+```
 
 response:
 ```json
 {
   "code": 200,
-  "msg": [
-    {
-      "id": 1,
-      "classifyName": "保健品",
-      "classifyImg":"/img/cc1.png"
-    },
-    {
-      "id": 2,
-      "classifyName": "美容产品",
-      "classifyImg":"/img/cc1.png"
-    }
-  ]
+  "msg": []
 }
 ```
-
