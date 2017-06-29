@@ -102,7 +102,7 @@
 |school_id|Integer|所属驾校id|
 |rule_number|Integer|班型规则|
 |cost|Integer|班型花费|
-|cost_content|TEXT|费用明细|
+|cost_content|TEXT|费用明细|1
 
 8.agent
 
@@ -168,6 +168,7 @@
 | ------------- |:-------------:|:-------------:|
 |id|Integer||
 |name|varchar||
+|account|varchar||
 |password|varchar||
 |role_id|Integer||
 
