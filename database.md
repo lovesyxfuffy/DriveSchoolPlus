@@ -4,6 +4,16 @@
 ### 驾校订单部分
 
 - - -
+0.user
+
+| column        | type          | comment          |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|username|varchar||
+|password|varchar||
+|openid|varchar||
+|telephone||
+
 
 1.driver_school
 
