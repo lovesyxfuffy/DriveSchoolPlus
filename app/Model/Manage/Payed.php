@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: zhaoshuai
  * Date: 2017/6/30
- * Time: 14:58
+ * Time: 15:35
  */
 
 namespace App\Model\Manage;
@@ -11,9 +11,9 @@ namespace App\Model\Manage;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Payed extends Model
 {
-    protected $table = "order";
+    protected $table = "payed";
 
     protected $primaryKey = "id";
 
@@ -30,8 +30,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'id','stu_name', 'stu_idCard','stu_telephone','stu_permit', 'stu_qq','field_id','class_id', 'type',
-        'stu_cost','agent_id', 'reduction','payed_id','inviter_id','create_time', 'status'
+        'id','order_id', 'amount','payed_amount','way', 'create_time','school_id','status',
     ];
 
     /**
@@ -42,6 +41,8 @@ class Order extends Model
     protected $hidden = [
 
     ];
+
+
 
 
 }

@@ -46,7 +46,7 @@
 | order_id      | Integer |订单id |
 | amount        | Integer |总额 |
 | payed_amount      | Integer | 已支付金额|
-| way               | Integer ||
+| way               | Integer | 支付方式|
 | create_time      | datetime |创建时间 |
 | school_id      | Integer | |
 | status     | Integer | |
@@ -58,11 +58,12 @@
 | id      | Integer | |
 | head_img      | varchar | 头像地址|
 | name      | varchar | |
-| age      | Integer | |
-| sex      | varchar | |
-| idCard     | varchar | |
+| age            | Integer | |
+| sex            | varchar | |
+| idCard         | varchar | |
+| stu_permit     | varchar |暂住证|
 | telephone      | varchar | |
-| qq      | varchar | |
+| qq               | varchar | |
 | schedule      | Integer |进度|
 | status      | Integer ||
 

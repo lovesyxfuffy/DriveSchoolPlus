@@ -18,9 +18,9 @@ code有如下几种情况
 <br/>
 <br/>
 管理员部分
-url前缀: /api/manage/account
--------
 
+-------
+url前缀: /api/manage/account
 #####  1.管理员账号登录
 url: /api/manage/account/i/auth
 
@@ -65,7 +65,6 @@ response:
 }
 ```
 
-
 #####  3.获取管理员自己的信息
 url: /api/manage/account/i/info
 
@@ -87,3 +86,7 @@ response:
     }
 }
 ```
+
+<br/>
+<br/>
+订单部分

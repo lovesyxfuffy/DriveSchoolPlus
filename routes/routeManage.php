@@ -23,4 +23,16 @@ Route::group(['prefix'=>'/api/manage'],function (){
 
         });
     });
+
+    Route::group(['prefix'=>'/order','namespace'=>'Manage\Order'],function (){
+        Route::post('/','AccountController@create');
+
+        Route::get('/i/info','AccountController@getMyInfo');
+
+        Route::group(['middleware'=>'auth.account'],function (){
+
+
+        });
+    });
+
 });
