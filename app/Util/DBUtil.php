@@ -33,14 +33,72 @@ class DBUtil
     }
 
 
-    static function convert($result){
+    /*对表进行 INSERT 验证*/
+    static function insert($table,$accountId){
+        $level = self::getLevel($table,$accountId);
+
+        /*判断用户是否有插入权限*/
+        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
+    }
+    /*对表进行 DELETE 验证*/
+    static function delete($table,$accountId){
+        $level = self::getLevel($table,$accountId);
+
+        /*判断用户是否有插入权限*/
+        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
+    }
+    /*对表进行 UPDATE 验证*/
+    static function update($table,$accountId){
+        $level = self::getLevel($table,$accountId);
+
+        /*判断用户是否有插入权限*/
+        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
+    }
+    /*对表进行 SELECT 验证*/
+    static function select($table,$accountId){
+        $level = self::getLevel($table,$accountId);
+
+        /*判断用户是否有插入权限*/
+        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
+    }
+
+    /*对表进行 权限的 验证*/
+    static function DBA($table,$accountId){
+        $level = self::getLevel($table,$accountId);
+
+        /*判断用户是否有插入权限*/
+        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
+    }
+
+    static function getLevel($table,$accountId){
+        return DB::table('account')
+            ->join('role_database','role_database.role_id','=','account.role_id')
+            ->join('database','database.id','=','role_database.database_id')
+            ->where('account.id',$accountId)
+            ->where('database.database_name',$table)
+            ->select('role_database.level')
+            ->get();
+    }
+    /*
+     *处理结果数据   $operation = true 是下划线转驼峰   false是驼峰转成下划线
+     * */
+    static function convert($result,$operation){
         //遍历$result 下划线转驼峰
+        $resultArr = array();
+
         foreach ($result as $row){
             foreach ($row as $key=>$value){
-                $row[self::toHump($key)] = $value;
-                unset($row[$key]);
+                if($operation){
+                    $row[self::toHump($key)] = $value;
+                }else{
+                    $row[self::unHump($key)] = $value;
+                }
+                if (self::unHump($key) != $key || self::toHump($key) != $key){
+                    unset($row[$key]);
+                }
             }
+            array_push($resultArr,$row);
         }
-        return $result;
+        return $resultArr;
     }
 }

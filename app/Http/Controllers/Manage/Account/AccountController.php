@@ -29,7 +29,7 @@ class AccountController extends Controller
         ]);
         if(!$res)
         {
-            return ResponseEntity::error(405,$this->backMeg);
+            return ResponseEntity::error(ResponseEntity::$statusBadRequest,$this->backMeg);
         }
 
         try{
@@ -40,8 +40,8 @@ class AccountController extends Controller
             if(count($account) > 0)
             {
                 $request->session()->put('accountId',$account[0]['id']);
-                return ResponseEntity::result("OK")->withCookie('account',$account[0]['id'],30)
-                    ->withCookie('password',md5($request->input('password')."#".$request->input('account')),30);
+                return ResponseEntity::result("OK")->withCookie('account',$account[0]['account'],30)
+                    ->withCookie('password',$account[0]['password'],30);
             }
 
             return ResponseEntity::error(ResponseEntity::$statusAuthFail,"用户名或密码错误");
@@ -53,7 +53,6 @@ class AccountController extends Controller
         }
 
     }
-
 
     /*
      |--------------------------------------------------------------------------
@@ -69,7 +68,7 @@ class AccountController extends Controller
         ]);
         if(!$res)
         {
-            return ResponseEntity::error(405,$this->backMeg);
+            return ResponseEntity::error(ResponseEntity::$statusBadRequest,$this->backMeg);
         }
 
         try{
@@ -95,9 +94,11 @@ class AccountController extends Controller
     public function getMyInfo(Request $request)
     {
         try{
-            $user = Account::findOrFail($request->session()->get('accountId'));
+            $account = Account::findOrFail($request->session()->get('accountId'));
 
-            return $user ? ResponseEntity::result($user) : ResponseEntity::error(ResponseEntity::$statusNotFound,"信息获取失败");
+            return $account ? ResponseEntity::result($account)->withCookie('account',$account['account'],30)
+                ->withCookie('password',$account['password'],30)
+                : ResponseEntity::error(ResponseEntity::$statusNotFound,"信息获取失败");
 
         }catch (\Exception $exception){
             return ResponseEntity::error(ResponseEntity::$statusServerError,"服务器Warning");

@@ -30,7 +30,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'id','stu_name', 'stu_idCard','stu_telephone','stu_permit', 'stu_qq','field_id','class_id', 'type',
+        'id','stu_name', 'stu_id_card','stu_telephone','stu_permit', 'stu_qq','field_id','class_id', 'type',
         'stu_cost','agent_id', 'reduction','payed_id','inviter_id','create_time', 'status'
     ];
 
@@ -42,6 +42,4 @@ class Order extends Model
     protected $hidden = [
 
     ];
-
-
 }

@@ -32,13 +32,13 @@
 | ------------- |:-------------:|:-------------:|
 | id      | Integer | |
 | stu_name      | varchar ||
-| stu_idCard      | varchar ||
+| stu_id_card      | varchar ||
 | stu_telephone     | varchar ||
 | stu_permit      | varchar |暂住证|
 | stu_qq      | varchar ||
 | field_id      | Integer |场地id|
 | class_id      | varchar |班型id|
-| type      | Integer |报名类型|
+| type           | Integer|报名类型|
 | stu_cost      | Integer |报名费用|
 | agent_id      | Integer |代理人id|
 | reduction      | Integer |优惠金额|
@@ -71,7 +71,7 @@
 | age            | Integer | |
 | sex            | varchar | |
 | idCard         | varchar | |
-| stu_permit     | varchar |暂住证|
+| permit     | varchar |暂住证|
 | telephone      | varchar | |
 | qq               | varchar | |
 | schedule      | Integer |进度|
@@ -192,8 +192,7 @@
 | ------------- |:-------------:|:-------------:|
 |id|Integer||
 |name|varchar||
-|role_authority|Integer||
-|role_database_authority||
+
 
 15.menu
 
@@ -205,7 +204,7 @@
 |level|Integer||
 |father_menu_id|Integer||
 
-16.database_authority
+16.database
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -220,6 +219,8 @@
 |id|Integer||
 |role_id|Integer||
 |database_id|Integer||
+|level|Integer||
+
 
 18.role_menu
 
