@@ -35,6 +35,8 @@
 | payed_id      | Integer |支付信息id|
 | inviter_id      | Integer |邀请人id|
 | create_time      | datetime |创建时间|
+| status     | Integer | |
+
 
 3.payed
 
