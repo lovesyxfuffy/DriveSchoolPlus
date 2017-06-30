@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Manage\Account;
 
 use App\Http\Controllers\Controller;
 use App\Model\Manage\Account;
-use App\Util\Manage\ResponseEntity;
+use App\Util\ResponseEntity;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller

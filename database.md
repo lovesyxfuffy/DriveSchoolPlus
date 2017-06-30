@@ -45,6 +45,8 @@
 | payed_id      | Integer |支付信息id|
 | inviter_id      | Integer |邀请人id|
 | create_time      | datetime |创建时间|
+| status     | Integer | |
+
 
 3.payed
 
@@ -52,8 +54,9 @@
 | ------------- |:-------------:|:-------------:|
 | id      | Integer | |
 | order_id      | Integer |订单id |
-| amount      | Integer |总额 |
-| payed      | Integer | 已支付金额|
+| amount        | Integer |总额 |
+| payed_amount      | Integer | 已支付金额|
+| way               | Integer ||
 | create_time      | datetime |创建时间 |
 | school_id      | Integer | |
 | status     | Integer | |

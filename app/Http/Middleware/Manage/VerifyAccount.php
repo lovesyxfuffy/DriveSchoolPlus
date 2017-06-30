@@ -9,7 +9,7 @@
 namespace App\Http\Middleware\Manage;
 
 
-use App\Util\Manage\ResponseEntity;
+use App\Util\ResponseEntity;
 use Closure;
 
 class VerifyAccount

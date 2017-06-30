@@ -6,7 +6,7 @@
  * Time: 21:12
  */
 
-namespace App\Util\Manage;
+namespace App\Util;
 
 
 class ResponseEntity
