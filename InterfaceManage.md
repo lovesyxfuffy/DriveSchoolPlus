@@ -36,7 +36,10 @@ request:
 
 response:
 ```json
-
+{
+    "code": "200",
+    "msg": "OK"
+}
 ```
 
 
@@ -48,15 +51,39 @@ method: post
 request: 
 ```json
 {
-  "account":"",
-  "password":""
+  "account":17865169626,
+  "password":123123,
+  "name":"zhaoshuai"
 }
 ```
 
 response:
 ```json
 {
-  "code": 200,
-  "msg": []
+    "code": "200",
+    "msg": "OK"
+}
+```
+
+
+#####  3.获取管理员自己的信息
+url: /api/manage/account/i/info
+
+method: get
+
+request: 
+```json
+{需要在登录成功之后}
+```
+response:
+```json
+{
+    "code": "200",
+    "msg": {
+        "id": 1,
+        "name": "zhaoshuai",
+        "account": "qweqwe",
+        "role_id": null
+    }
 }
 ```

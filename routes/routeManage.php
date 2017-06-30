@@ -18,5 +18,9 @@ Route::group(['prefix'=>'/api/manage'],function (){
         Route::post('/i/info','AccountController@create');
 
 
+        Route::group(['middleware'=>'auth.account'],function (){
+            Route::get('/i/info','AccountController@getMyInfo');
+
+        });
     });
 });
