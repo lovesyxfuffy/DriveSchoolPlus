@@ -9,7 +9,7 @@
 namespace App\Util;
 
 
-class OrderEntity
+class OrderUtil
 {
 
 

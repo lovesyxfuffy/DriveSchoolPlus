@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use app\Util\DBUtil;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -28,6 +29,7 @@ class Controller extends BaseController
             return false;
         }
         return true;
+        $user = DBUtil::convert(DB::select("user"));
     }
 
 }
