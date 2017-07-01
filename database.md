@@ -54,7 +54,7 @@
 | ------------- |:-------------:|:-------------:|
 | id      | Integer | |
 | order_id      | Integer |订单id |
-| amount        | Integer |总额 |
+| all_amount        | Integer |总额 |
 | payed_amount      | Integer | 已支付金额|
 | way               | Integer | 支付方式|
 | create_time      | datetime |创建时间 |
@@ -75,6 +75,7 @@
 | telephone      | varchar | |
 | qq               | varchar | |
 | schedule      | Integer |进度|
+| field_id      | Integer |场地id|
 | status      | Integer ||
 
 5.trainer
@@ -112,6 +113,7 @@
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
 |id|Integer||
+|name|varchar|班型名字|
 |content|TEXT|班型描述|
 |school_id|Integer|所属驾校id|
 |rule_number|Integer|班型规则|
@@ -171,7 +173,7 @@
 |position_x|Double|经纬度-经度|
 |position_y|Double|经纬度-纬度|
 |position|varchar|位置描述|
-
+|status|Integer||
 - - -
 
 ### 后台管理权限部分
