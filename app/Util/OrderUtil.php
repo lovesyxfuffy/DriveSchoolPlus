@@ -29,12 +29,10 @@ class OrderUtil
         'classId'=>'required|filled|numeric',
         'type'=>'required|filled',
         'stuCost'=>'required|filled|numeric',
-    //     'agentId'=>'required',
+    //   'agentId'=>'required',
     //   'reduction'=>'required',
         //   'payed_id'=>'required|filled',
      //   'inviter_id'=>'required|filled',
-      //  'create_time'=>'required|filled',
-      //  'status'
     ];
 
 

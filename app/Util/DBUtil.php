@@ -8,8 +8,18 @@
 
 namespace App\Util;
 
+use Illuminate\Support\Facades\DB;
+
 class DBUtil
 {
+    /*
+     * 对于数据库表权限的操作
+     * */
+    static $AuthoritySelect = 1;
+    static $AuthorityInsert = 2;
+    static $AuthorityUpdate = 4;
+    static $AuthorityDelete = 8;
+
     /**
      * 下划线转驼峰
      * 思路:
@@ -33,43 +43,20 @@ class DBUtil
     }
 
 
-    /*对表进行 INSERT 验证*/
-    static function insert($table,$accountId){
-        $level = self::getLevel($table,$accountId);
-
-        /*判断用户是否有插入权限*/
-        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
-    }
-    /*对表进行 DELETE 验证*/
-    static function delete($table,$accountId){
-        $level = self::getLevel($table,$accountId);
-
-        /*判断用户是否有插入权限*/
-        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
-    }
-    /*对表进行 UPDATE 验证*/
-    static function update($table,$accountId){
-        $level = self::getLevel($table,$accountId);
-
-        /*判断用户是否有插入权限*/
-        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
-    }
-    /*对表进行 SELECT 验证*/
-    static function select($table,$accountId){
-        $level = self::getLevel($table,$accountId);
-
-        /*判断用户是否有插入权限*/
-        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
-    }
-
     /*对表进行 权限的 验证*/
-    static function DBA($table,$accountId){
+    static function DBA($table,$accountId,$Authority){
         $level = self::getLevel($table,$accountId);
 
         /*判断用户是否有插入权限*/
-        return decbin($level[0]->level) & decbin(self::$AuthorityInsert) ? true : false;
+        if(count($level) > 0){
+            return ($level[0]->level & $Authority) == $Authority;
+        }
+        return false;
     }
 
+    /*
+     * 获取管理员的对应 操作数据库的能力
+     * */
     static function getLevel($table,$accountId){
         return DB::table('account')
             ->join('role_database','role_database.role_id','=','account.role_id')
@@ -80,24 +67,32 @@ class DBUtil
             ->get();
     }
     /*
-     *处理结果数据   $operation = true 是下划线转驼峰   false是驼峰转成下划线
+     *处理结果数据  遍历$result 驼峰转下划线  $operation = true 是下划线转驼峰   false是驼峰转成下划线
      * */
     static function convert($result,$operation){
-        //遍历$result 下划线转驼峰
         $resultArr = array();
 
         foreach ($result as $row){
+            $rowArr = array();
             foreach ($row as $key=>$value){
                 if($operation){
-                    $row[self::toHump($key)] = $value;
+                    $rowArr[self::toHump($key)] = $value;
                 }else{
-                    $row[self::unHump($key)] = $value;
-                }
-                if (self::unHump($key) != $key || self::toHump($key) != $key){
-                    unset($row[$key]);
+                    $rowArr[self::unHump($key)] = $value;
                 }
             }
-            array_push($resultArr,$row);
+//            $resultArr->prepend($row);
+            array_push($resultArr,$rowArr);
+        }
+        return $resultArr;
+    }
+
+    static function convertToHump($result){
+        $resultArr = collect();
+        foreach ($result as $row){
+            return $row;
+            $resultArr->prepend($row);
+//            array_push($resultArr,$row);
         }
         return $resultArr;
     }

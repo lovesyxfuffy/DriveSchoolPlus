@@ -21,3 +21,7 @@ include "routeManage.php";
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function () {
+    return 8 & 12 ;
+});

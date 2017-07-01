@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Manage\Order;
 
 
 use App\Http\Controllers\Controller;
+use App\Model\Manage\Payed;
 use App\Util\DBUtil;
 use App\Util\OrderUtil;
 use App\Util\ResponseEntity;
@@ -39,7 +40,7 @@ class OrderController extends Controller
         }
         $res = DBUtil::convert([$request->all()],false);
 
-        if(DBUtil::insert('order',$request->session()->get('accountId'))){
+        if(DBUtil::DBA('order',$request->session()->get('accountId'),DBUtil::$AuthorityInsert)){
 
             try{
                 $result = DB::table('order')
@@ -59,7 +60,7 @@ class OrderController extends Controller
     | 获取所有订单
     |--------------------------------------------------------------------------
     */
-    public function getOrder(Request $request){
+    public function getOrderAll(Request $request){
         $filter = $this->filter($request,[
             'page'=>'required|filled|numeric',
             'rows'=>'required|filled|numeric'
@@ -68,15 +69,46 @@ class OrderController extends Controller
         {
             return ResponseEntity::error(ResponseEntity::$statusBadRequest,$this->backMeg);
         }
-
-        if(DBUtil::select('order',$request->session()->get('accountId'))){
-
+        /*先进行判断*/
+        if(DBUtil::DBA('order',$request->session()->get('accountId'),DBUtil::$AuthoritySelect)){
             try{
                 $result = DB::table('order')
-                    ->orderBy('create_time','desc')
-                    ->paginate($request->input('rows'));
+                    ->leftJoin('payed','order.id','=','payed.order_id')
+                    ->leftJoin('field','field.id','=','order.field_id')
+                    ->leftJoin('class','class.id','=','order.class_id')
+                    ->leftJoin('agent','agent.id','=','order.agent_id')
+                    ->orderBy('order.create_time','desc');
+                /*根据支付方式查询*/
+                if($request->input('payedWay')){
+                    $result->where('payed.way','=',$request->input('payedWay'));
+                }
+                /*根据学员姓名查询*/
+                if($request->input('stuName')){
+                    $result->where('stu_name','=',$request->input('stuName'));
+                }
+                /*根据学员手机号查询*/
+                if($request->input('stuTelephone')){
+                    $result->where('stu_telephone','=',$request->input('stuTelephone'));
+                }
+                /*根据学员身份证号查询*/
+                if($request->input('stuIdCard')){
+                    $result->where('stu_id_card','=',$request->input('stuIdCard'));
+                }
+                /*根据场地查询*/
+                if($request->input('fieldId')){
+                    $result->where('field_id','=',$request->input('fieldId'));
+                }
+
+                $result = $result->select('order.id as order_id','stu_name','stu_id_card','stu_telephone','stu_permit','stu_qq','field.name as field_name','class.name as class_name',
+                    'type as order_type','stu_cost','agent.name as agent_name','order.reduction as order_reduction','order.create_time as order_create_time',
+                    'order.status as order_status','all_amount','payed_amount','way as payed_way','payed.create_time as payed_create_time','payed.status as payed_status')
+                    ->paginate($request->input('rows'))->toArray();
+
+                $result['data'] = DBUtil::convert($result['data'],true);
 
                 return ResponseEntity::result($result);
+
+
             }catch (\Exception $exception){
                 return ResponseEntity::error(ResponseEntity::$statusServerError,"服务器Waring");
             }catch (\Error $error){
@@ -91,8 +123,16 @@ class OrderController extends Controller
     |--------------------------------------------------------------------------
     */
     public function getOrderStatistics(Request $request){
+        try{
 
 
+
+
+        }catch (\Exception $exception){
+            return ResponseEntity::error(ResponseEntity::$statusServerError,"服务器Waring");
+        }catch (\Error $error){
+            return ResponseEntity::error(ResponseEntity::$statusServerError,"服务器Error");
+        }
     }
     /*
    |--------------------------------------------------------------------------

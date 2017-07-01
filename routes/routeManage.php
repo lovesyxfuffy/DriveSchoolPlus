@@ -26,12 +26,13 @@ Route::group(['prefix'=>'/api/manage'],function (){
 
     Route::group(['prefix'=>'/order','namespace'=>'Manage\Order'],function (){
 
-        Route::get('/i/info','AccountController@getMyInfo');
 
         Route::group(['middleware'=>'auth.account'],function (){
-            Route::post('/','OrderController@createOrder');
+            Route::post('/','OrderController@createOrder'); //管理员创建订单
 
-            Route::get('/','OrderController@getOrder');
+            Route::get('/','OrderController@getOrderAll');//管理员获取订单 按时间倒序排序
+
+            Route::get('/detail','OrderController@getOrderDetail');//管理员获取订单的详细信息
         });
     });
 
