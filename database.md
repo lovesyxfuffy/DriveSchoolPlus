@@ -65,13 +65,13 @@
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
-| id      | Integer | |
-| head_img      | varchar | 头像地址|
-| name      | varchar | |
+| id             | Integer | |
+| head_img        | varchar | 头像地址|
+| name            | varchar | |
 | age            | Integer | |
 | sex            | varchar | |
 | idCard         | varchar | |
-| permit     | varchar |暂住证|
+| permit         | varchar |暂住证|
 | telephone      | varchar | |
 | qq               | varchar | |
 | schedule      | Integer |进度|
@@ -244,11 +244,32 @@
 |school_acceptance|TEXT|驾校服务承诺
 |school_notice|TEXT|学车须知|
 |text_notice|TEXT|测考锦囊|
+
+
+20.account_student_log(管理员和学员操作记录表)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|account_id|Integer||
+|student_id|Integer||
+|schedule_id|varchar||
+|create_time|datetime||
+
+21.account_order_log(管理员和订单的关系)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|account_id|Integer||
+|order_id|Integer||
+|content|varchar||
+|create_time|datetime||
 - - -
 
 ### 线上测考部分
 
-20.questions
+21.questions
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -259,7 +280,7 @@
 |content|TEXT|题目描述|
 |type|Integer|单选多选|
 
-21.options
+22.options
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -268,7 +289,7 @@
 |question_order|Integer|ABCD(1,2,3,4保存)|
 |content|varchar||
 
-22.student_question
+23.student_question
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
