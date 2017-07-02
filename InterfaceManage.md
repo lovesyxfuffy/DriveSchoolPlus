@@ -221,3 +221,60 @@ response:
     }
 }
 ```
+
+#####  3.获取订单统计情况 按日期（在页面上面）
+url: /api/manage/
+
+method: post
+
+request: 
+```json
+{
+  "createTime":"2017-08-20"
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": {
+        "OrderAllNumber": 8,
+        "OrderCanceledNumber": 3,
+        "OrderToConfirmedNumber": 2,
+        "OrderConfirmedNumber": 2,
+        "OrderAllMoney": "11000",
+        "OrderOnlineMoney": "2000",
+        "OrderOfflineMoney": "3000"
+    }
+}
+```
+#####  4.更改订单的状态 （订单一共有四个状态  默认1 已提交状态  2已经取消  3已经支付完成  4已经确认）
+url: /api/manage/order
+
+method: post
+
+request: 
+```json
+{
+  "orderStatus":"3",  
+  "orderId":"1,2,4,5"  （传递一个或多个订单的ID,如果是多个的话，用,隔开）
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": {
+        "OrderAllNumber": 8,
+        "OrderCanceledNumber": 3,
+        "OrderToConfirmedNumber": 2,
+        "OrderConfirmedNumber": 2,
+        "OrderAllMoney": "11000",
+        "OrderOnlineMoney": "2000",
+        "OrderOfflineMoney": "3000"
+    }
+}
+```
+

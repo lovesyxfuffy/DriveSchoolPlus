@@ -15,6 +15,4 @@ class PayedUtil
     static $PayedWayOnline = 1;
     static $PayedWayOffline = 2;
 
-
-
 }

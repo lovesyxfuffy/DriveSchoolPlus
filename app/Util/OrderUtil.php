@@ -17,7 +17,7 @@ class OrderUtil
     static $OrderStatusReady = 1;/*订单待支付*/
     static $OrderStatusCanceled = 2;/*订单取消*/
     static $OrderStatusSucceed = 3;/*成功支付*/
-    static $OrderStatusConfirm = 4;/*订单确认*/
+    static $OrderStatusConfirmed = 4;/*订单确认*/
 
     static $CheckRules = [
         'stuName'=>'required|filled|max:30',
