@@ -278,3 +278,39 @@ response:
 }
 ```
 
+
+<br/>
+<br/>
+学员管理部分
+
+#####  1.增加学员
+url: /api/manage/student
+
+method: post
+
+request: 
+```json
+{
+        "stuName":"required|filled|max:30",
+        "stuIdCard":"required|filled|max:18",
+        "stuTelephone":"required|filled",
+        "stuPermit":"required|filled",
+        "stuQq":"required|filled|numeric",
+        "fieldId":"required|filled|numeric",
+        "classId":"required|filled|numeric",
+        "type":"required|filled",
+        "stuCost":"required|filled|numeric",
+        "agentId":"required",
+        "reduction":"required",
+        "inviter_id":"required|filled",
+  
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "OK"
+}
+```
+
