@@ -265,6 +265,16 @@
 |order_id|Integer||
 |content|varchar||
 |create_time|datetime||
+
+22.schedule
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|level|Integer||
+|description|varchar||
+|status|Integer||
+
 - - -
 
 ### 线上测考部分
@@ -297,6 +307,10 @@
 |student_id|Integer||
 |question_id|Integer||
 |type|Integer|收藏OR错题|
+
+
+
+
 
 
 
