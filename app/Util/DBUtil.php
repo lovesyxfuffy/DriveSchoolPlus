@@ -16,4 +16,10 @@ class DBUtil
         //遍历$result 下划线转驼峰
         return $result;
     }
+
+    static function select($table , $accountId){
+        //权限验证
+        return DB::select($table);
+
+    }
 }

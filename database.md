@@ -12,7 +12,7 @@
 |username|varchar||
 |password|varchar||
 |openid|varchar||
-|telephone||
+|telephone|varchar||
 
 
 1.driver_school
