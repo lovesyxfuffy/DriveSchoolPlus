@@ -26,6 +26,7 @@ class VerifyAccount
      * @return mixed
      */
     public function handle($request,Closure $next){
+
         if($request->session()->exists('accountId')){
             return $next($request);
         }elseif ($request->cookie('account') && $request->cookie('password')){
@@ -38,6 +39,5 @@ class VerifyAccount
             }
         }
         return ResponseEntity::error(ResponseEntity::$statusAuthFail,'登录状态失效，请重新登录');
-
     }
 }

@@ -32,13 +32,13 @@
 | ------------- |:-------------:|:-------------:|
 | id      | Integer | |
 | stu_name      | varchar ||
-| stu_idCard      | varchar ||
+| stu_id_card      | varchar ||
 | stu_telephone     | varchar ||
 | stu_permit      | varchar |暂住证|
 | stu_qq      | varchar ||
 | field_id      | Integer |场地id|
 | class_id      | varchar |班型id|
-| type      | Integer |报名类型|
+| type           | Integer|报名类型|
 | stu_cost      | Integer |报名费用|
 | agent_id      | Integer |代理人id|
 | reduction      | Integer |优惠金额|
@@ -54,9 +54,9 @@
 | ------------- |:-------------:|:-------------:|
 | id      | Integer | |
 | order_id      | Integer |订单id |
-| amount        | Integer |总额 |
+| all_amount        | Integer |总额 |
 | payed_amount      | Integer | 已支付金额|
-| way               | Integer ||
+| way               | Integer | 支付方式|
 | create_time      | datetime |创建时间 |
 | school_id      | Integer | |
 | status     | Integer | |
@@ -65,15 +65,17 @@
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
-| id      | Integer | |
-| head_img      | varchar | 头像地址|
-| name      | varchar | |
-| age      | Integer | |
-| sex      | varchar | |
-| idCard     | varchar | |
+| id             | Integer | |
+| head_img        | varchar | 头像地址|
+| name            | varchar | |
+| age            | Integer | |
+| sex            | varchar | |
+| idCard         | varchar | |
+| permit         | varchar |暂住证|
 | telephone      | varchar | |
-| qq      | varchar | |
+| qq               | varchar | |
 | schedule      | Integer |进度|
+| field_id      | Integer |场地id|
 | status      | Integer ||
 
 5.trainer
@@ -111,6 +113,7 @@
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
 |id|Integer||
+|name|varchar|班型名字|
 |content|TEXT|班型描述|
 |school_id|Integer|所属驾校id|
 |rule_number|Integer|班型规则|
@@ -170,7 +173,7 @@
 |position_x|Double|经纬度-经度|
 |position_y|Double|经纬度-纬度|
 |position|varchar|位置描述|
-
+|status|Integer||
 - - -
 
 ### 后台管理权限部分
@@ -191,8 +194,7 @@
 | ------------- |:-------------:|:-------------:|
 |id|Integer||
 |name|varchar||
-|role_authority|Integer||
-|role_database_authority||
+
 
 15.menu
 
@@ -204,7 +206,7 @@
 |level|Integer||
 |father_menu_id|Integer||
 
-16.database_authority
+16.database
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -219,6 +221,8 @@
 |id|Integer||
 |role_id|Integer||
 |database_id|Integer||
+|level|Integer||
+
 
 18.role_menu
 
@@ -240,11 +244,42 @@
 |school_acceptance|TEXT|驾校服务承诺
 |school_notice|TEXT|学车须知|
 |text_notice|TEXT|测考锦囊|
+
+
+20.account_student_log(管理员和学员操作记录表)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|account_id|Integer||
+|student_id|Integer||
+|schedule_id|varchar||
+|create_time|datetime||
+
+21.account_order_log(管理员和订单的关系)
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|account_id|Integer||
+|order_id|Integer||
+|content|varchar||
+|create_time|datetime||
+
+22.schedule
+
+| column        | type          | comment        |  
+| ------------- |:-------------:|:-------------:|
+|id|Integer||
+|level|Integer||
+|description|varchar||
+|status|Integer||
+
 - - -
 
 ### 线上测考部分
 
-20.questions
+21.questions
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -255,7 +290,7 @@
 |content|TEXT|题目描述|
 |type|Integer|单选多选|
 
-21.options
+22.options
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -264,7 +299,7 @@
 |question_order|Integer|ABCD(1,2,3,4保存)|
 |content|varchar||
 
-22.student_question
+23.student_question
 
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
@@ -272,6 +307,10 @@
 |student_id|Integer||
 |question_id|Integer||
 |type|Integer|收藏OR错题|
+
+
+
+
 
 
 
