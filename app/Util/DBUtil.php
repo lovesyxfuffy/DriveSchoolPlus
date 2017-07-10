@@ -96,4 +96,10 @@ class DBUtil
         }
         return $resultArr;
     }
+
+    static function select($table , $accountId){
+        //权限验证
+        return DB::select($table);
+
+    }
 }

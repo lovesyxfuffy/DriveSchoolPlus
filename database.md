@@ -8,11 +8,11 @@
 
 | column        | type          | comment          |  
 | ------------- |:-------------:|:-------------:|
-|id | Integer ||
-|username | varchar ||
-|password | varchar||
-|openid | varchar||
-|telephone||
+|id|Integer||
+|username|varchar||
+|password|varchar||
+|openid|varchar||
+|telephone|varchar||
 
 
 1.driver_school

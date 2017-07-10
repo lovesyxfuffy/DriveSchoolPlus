@@ -29,7 +29,7 @@ class Controller extends BaseController
             return false;
         }
         return true;
-        $user = DBUtil::convert(DB::select("user"));
+        $user = DBUtil::convert(DBUtil::select()->where());
     }
 
 }
