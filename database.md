@@ -244,6 +244,8 @@
 |school_acceptance|TEXT|驾校服务承诺
 |school_notice|TEXT|学车须知|
 |text_notice|TEXT|测考锦囊|
+|rule|varchar|100%,75%,95,5,96,3 这样写|
+
 
 
 20.account_student_log(管理员和学员操作记录表)

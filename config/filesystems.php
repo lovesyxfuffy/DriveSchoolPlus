@@ -63,6 +63,12 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        'img' => [
+            'driver' => 'img',
+            'root' => storage_path('/public/img'),
+            'url' => env('APP_URL').'/public/img',
+        ],
+
     ],
 
 ];

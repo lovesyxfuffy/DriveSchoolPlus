@@ -11,5 +11,7 @@ namespace App\Util;
 
 class ScheduleUtil
 {
+    static $statusYes= 1;
+    static $statusNo = 2;
 
 }

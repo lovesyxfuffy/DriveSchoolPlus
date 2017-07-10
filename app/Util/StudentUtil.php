@@ -11,7 +11,7 @@ namespace App\Util;
 
 class StudentUtil
 {
-    /*学员的状态*/
+    /*学员的学习*/
     static $statusNoPermit = ['level'=>'1','msg'=>'代办暂住证'];
     static $statusOwnPermit = ['level'=>'2','msg'=>'自带暂住证'];
     static $statusNoPE = ['level'=>'3','msg'=>'未体检'];
@@ -37,6 +37,25 @@ class StudentUtil
     static $statusLicense = 18;
     static $statusFinish = 19;
 
+    static $CheckRules = [
+        'head_img'=>'required|filled',
+        'name'=>'required|filled|max:30',
+        'age'=>'required|filled|numeric',
+        'sex'=>'required|filled|numeric',
+        'idCard'=>'required|filled|max:18',
+        'telephone'=>'required|filled',
+        'permit'=>'required|filled',
+        'qq'=>'required|filled|numeric',
+        'fieldId'=>'required|filled|numeric',
+    ];
 
+    /*
+     * 获取考试通过的条件
+     *
+     * @return Array
+     * */
+    static function getExamRules(){
+        return explode(',',DB::table('school_settings')->find(1)->toArray());
+    }
 
 }

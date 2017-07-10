@@ -10,8 +10,6 @@ namespace App\Http\Controllers\Manage\Order;
 
 
 use App\Http\Controllers\Controller;
-use App\Model\Manage\Order;
-use App\Model\Manage\Payed;
 use App\Util\DBUtil;
 use App\Util\OrderUtil;
 use App\Util\PayedUtil;
