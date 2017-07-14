@@ -64,9 +64,15 @@ return [
         ],
 
         'img' => [
-            'driver' => 'img',
-            'root' => storage_path('/public/img'),
-            'url' => env('APP_URL').'/public/img',
+            'driver' => 'local',
+            'root' => storage_path('app/public/img/'),
+            'url' => env('APP_URL').'/storage',
+        ],
+
+        'excel' => [
+            'driver' => 'local',
+            'root' => storage_path('/app/public/excel/'),
+            'url' => env('APP_URL').'/storage',
         ],
 
     ],

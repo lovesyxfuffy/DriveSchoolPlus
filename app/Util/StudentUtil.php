@@ -38,15 +38,15 @@ class StudentUtil
     static $statusFinish = 19;
 
     static $CheckRules = [
-        'head_img'=>'required|filled',
-        'name'=>'required|filled|max:30',
-        'age'=>'required|filled|numeric',
-        'sex'=>'required|filled|numeric',
-        'idCard'=>'required|filled|max:18',
+        'headImg'  =>'required|filled',
+        'name'    =>'required|filled|max:30',
+        'age'      =>'required|filled|numeric',
+        'sex'      =>'required|filled|numeric',
+        'idCard'   =>'required|filled|max:18',
         'telephone'=>'required|filled',
-        'permit'=>'required|filled',
-        'qq'=>'required|filled|numeric',
-        'fieldId'=>'required|filled|numeric',
+        'permit'   =>'required|filled',
+        'qq'       =>'required|filled|numeric',
+        'fieldId'  =>'required|filled|numeric',
     ];
 
     /*
@@ -56,6 +56,16 @@ class StudentUtil
      * */
     static function getExamRules(){
         return explode(',',DB::table('school_settings')->find(1)->toArray());
+    }
+
+    /*
+     * 处理学生年龄（因为学生年龄存储的是年限）
+     * */
+    static function dealAge($student){
+        foreach ($student as $row){
+            $row->age = date('Y') - $row->age;
+        }
+        return $student;
     }
 
 }

@@ -20,6 +20,6 @@ class FileController extends Controller
      * */
     public static function upload($disk,$filename,$fileContent){
 
-        return Storage::disk('img')->put($filename,$fileContent);
+        return Storage::disk($disk)->put($filename,$fileContent);
     }
 }
