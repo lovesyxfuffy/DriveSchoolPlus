@@ -126,12 +126,18 @@
 | ------------- |:-------------:|:-------------:|
 |id|Integer||
 |name|varchar||
+|sex|varchar||
+|age|Integer||
+|id_card|Integer||
 |telephone|varchar||
-|bank_number|varchar|银行账户|
+|bank_card_number|varchar|银行账户|
 |bank_info|varchar|开户银行信息|
 |percentage|Integer|分红数目|
 |reduction|Integer|能提供的优惠金额|
-|inviter_id|Integer|上级代理人id|
+|father_agent_id|Integer|上级代理人id|
+|create_time| datetime |创建时间|
+|type| Integer | |
+
 
 9.percentage
 

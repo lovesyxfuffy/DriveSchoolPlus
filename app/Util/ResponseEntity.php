@@ -40,14 +40,4 @@ class ResponseEntity
             'msg' => $errorMsg
         ]);
     }
-
-
-
-   /* static function waring($warningMsg){
-        return response()->json([
-            'code' => '405',
-            'msg' => $warningMsg
-        ]);
-    }*/
-
 }

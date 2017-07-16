@@ -6,7 +6,6 @@ use App\Util\ResponseEntity;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -47,7 +46,31 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception))
+        {
+            return ResponseEntity::error(ResponseEntity::$statusNotFound,'找不到啦~~');
+        }
         return  parent::render($request, $exception);
+    }
+
+    /**
+     * Render the given HttpException
+     * @param  \Symfony\Component\HttpKernel\Exception\HttpException $exception
+     * @param  \Illuminate\Http\Request  $request
+     * @return \App\Util\ResponseEntity
+     */
+    protected function dealHttpException($exception, $request)
+    {
+        if($request->ajax()){
+            return ResponseEntity::error(ResponseEntity::$statusBadRequest,$exception->getStatusCode());
+        }else{
+            if (view()->exists('errors.'.$exception->getStatusCode()))
+            {
+                return response()->view('errors.'.$exception->getStatusCode(), [], $exception->getStatusCode());
+            } else {
+                return response()->view('errors.500', [], $e->getStatusCode());
+            }
+        }
     }
 
     /**

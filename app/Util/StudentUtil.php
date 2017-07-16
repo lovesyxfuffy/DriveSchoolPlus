@@ -46,7 +46,7 @@ class StudentUtil
         'telephone'=>'required|filled',
         'permit'   =>'required|filled',
         'qq'       =>'required|filled|numeric',
-        'fieldId'  =>'required|filled|numeric',
+ //       'fieldId'  =>'required|filled|numeric',
     ];
 
     /*

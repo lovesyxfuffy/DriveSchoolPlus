@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Manage\Student;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Manage\FileService\FileController;
-use App\Model\Manage\Payed;
 use App\Util\DBUtil;
 use App\Util\ExcelUtil;
 use App\Util\ResponseEntity;
@@ -23,21 +22,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
-    public $importSucceed = true;
-
-    public $excelInput = array();
     /*
      * 我们声明了一个可以添加学生的方法
      * */
     public function newStudent($students){
         return DB::table('student')->insert($students);
-    }
-
-    /*
-   * 记录管理员与学员的操作记录
-   * */
-    public function addAccountStudentLog($log){
-
     }
 
     /**
@@ -152,7 +141,7 @@ class StudentController extends Controller
     }
 
     /*
-     *获取学员的信息
+     * 获取学员的信息
      * */
     public function getStudentInfo(Request $request){
         $filter = $this->filter($request,[
@@ -163,6 +152,7 @@ class StudentController extends Controller
         {
             return ResponseEntity::error(ResponseEntity::$statusBadRequest,$this->backMeg);
         }
+
         try{
             if(!DBUtil::DBA('student',$request->session()->get('accountId'),DBUtil::$AuthoritySelect)){
                 return ResponseEntity::error(ResponseEntity::$statusMethodNotAllow,"权限不足");
@@ -188,7 +178,7 @@ class StudentController extends Controller
 
             $students = $students->paginate($request->input('rows'))->toArray();
 
-            $students['data'] = StudentUtil::dealAge(DBUtil::convert($students['data'],true));
+            $students['data'] =  DBUtil::convert(StudentUtil::dealAge($students['data']),true);
 
             return ResponseEntity::result($students);
 
@@ -200,7 +190,7 @@ class StudentController extends Controller
 
     }
     /*
-     * 修改学员信息
+     * 修改学员信息 （包括 教练、状态、场地、班型等等）
      * */
     public function editStudentInfo(Request $request){
 
@@ -319,8 +309,11 @@ class StudentController extends Controller
         {
             return ResponseEntity::error(ResponseEntity::$statusBadRequest,$this->backMeg);
         }*/
-        try{
 
+        try{
+            if(empty($request->all())){
+                return ResponseEntity::error(ResponseEntity::$statusBadRequest,'参数不够');
+            }
             if(!DBUtil::DBA('student',$request->session()->get('accountId'),DBUtil::$AuthoritySelect)){
                 return ResponseEntity::error(ResponseEntity::$statusMethodNotAllow,"权限不足");
             }
@@ -329,6 +322,10 @@ class StudentController extends Controller
 
             if(!empty($request->input('schedule'))){
                 $students->where('schedule',$request->input('schedule'));
+            }
+
+            if(!empty($request->input('id'))){
+                $students->whereIn('id',explode(',',$request->input('id')));
             }
             /*
              * 根据时间导出
@@ -341,10 +338,11 @@ class StudentController extends Controller
                 $students->where('create_time','<=',$request->input('endTime'));
             }
             $students = $students->select(['name','sex','age','id_card','telephone','permit','create_time'])->get();
-            $StudentArr = [["姓名",'性别','年龄','身份证号','手机号','暂住证','入学日期']];
+            $StudentHead =
+                ["姓名",'性别','年龄','身份证号','手机号','暂住证','入学日期']
+            ;
 
-            ExcelUtil::export($this->ObjectToArray($StudentArr,StudentUtil::dealAge($students)),date('Y-m-d H:i:s').' StudentRecords');
-
+            ExcelUtil::export(StudentUtil::dealAge($students)->prepend($StudentHead),date('Y-m-d H:i:s').' StudentRecords');
         }catch (\Exception $exception){
             return ResponseEntity::error(ResponseEntity::$statusServerError,"服务器Waring");
         }catch (\Error $error){
@@ -354,30 +352,12 @@ class StudentController extends Controller
     /*
      * 将查询结果从对象转化成数组
      * */
-    public function ObjectToArray(&$studentArr,$student){
-
-        foreach ($student as $item)
-        {
-            $row = array();
-            $row['name'] = $item->name;
-            $row['sex'] = $item->sex;
-            $row['age'] = $item->age;
-            $row['id_card'] = $item->id_card;
-            $row['telephone'] = $item->telephone;
-            $row['permit'] = $item->permit;
-            $row['create_time'] = $item->create_time;
-            $studentArr[] = $row;
-        }
-        return $studentArr;
-    }
-
     /*
     |--------------------------------------------------------------------------
     | 理论考试部分
     |--------------------------------------------------------------------------
     */
     public function getExamRules(Request $request){
-
 
     }
 
