@@ -150,6 +150,15 @@ class TrainerController extends Controller
     }
 
     /*
+     * 获取头像
+     * */
+    public function getTrainerImg(Request $request){
+        return Storage::disk('img')->get('/avatar/'.$request->input('headImg'));
+    }
+
+
+
+    /*
      * 预约
      * */
     public function getPreview(){

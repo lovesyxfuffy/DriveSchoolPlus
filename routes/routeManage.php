@@ -59,7 +59,6 @@ Route::group(['prefix'=>'/api/manage'],function (){
             Route::group(['prefix'=>'/examination'],function (){
 
 
-
             });
         });
 
@@ -82,13 +81,9 @@ Route::group(['prefix'=>'/api/manage'],function (){
         Route::group(['prefix'=>'/agent','namespace'=>'Manage\Agent'],function (){
 
             Route::post('/one','AgentController@createOneAgent'); //管理员添加一个代理
-            Route::post('/batch','AgentController@createBatchAgent'); //管理员批量添加代理
 
             Route::put('/info','AgentController@editAgentInfo');//修改代理的信息
             Route::get('/info','AgentController@getAgentInfo');//获取代理的信息
-
-            Route::get('/img','AgentController@getAgentImg');//获取代理的头像
-            Route::post('/img','AgentController@editAgentImg');//修改代理的头像
 
         });
     });

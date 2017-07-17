@@ -136,7 +136,9 @@
 |reduction|Integer|能提供的优惠金额|
 |father_agent_id|Integer|上级代理人id|
 |create_time| datetime |创建时间|
+|settlement_cycle| Integer | |
 |type| Integer | |
+|status| Integer | |
 
 
 9.percentage
@@ -155,7 +157,7 @@
 | column        | type          | comment        |  
 | ------------- |:-------------:|:-------------:|
 |id|Integer||
-|Cycle|Integer|结算周期，单位天|
+|cycle|Integer|结算周期，单位天|
 |level|Integer|结算上溯等级|
 
 11.finance_record(财务记录)
