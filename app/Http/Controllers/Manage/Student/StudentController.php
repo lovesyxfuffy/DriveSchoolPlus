@@ -238,7 +238,7 @@ class StudentController extends Controller
             return ResponseEntity::error(ResponseEntity::$statusBadRequest,$this->backMeg);
         }
 
-        return explode('/',FileController::upload('img','avatar',$request->file('headImg')))[1];
+        return ResponseEntity::result(explode('/',FileController::upload('img','avatar',$request->file('headImg')))[1]);
     }
 
     /*

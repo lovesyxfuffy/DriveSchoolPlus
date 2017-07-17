@@ -40,18 +40,17 @@ Route::group(['prefix'=>'/api/manage'],function (){
         /*学员部分路由*/
         Route::group(['prefix'=>'/student','namespace'=>'Manage\Student'],function (){
 
-            Route::get('/img','StudentController@getStudentImg');//获取学员的头像
-            Route::post('/img','StudentController@editStudentImg');//修改学员的头像
-
-            Route::put('/info','StudentController@editStudentInfo');//修改学员的信息
-            Route::get('/info','StudentController@getStudentInfo');//获取学员的信息
-
-            Route::put('/schedule','StudentController@editStudentSchedule');//修改学员的进度
-
 
             Route::post('/one','StudentController@createOneStudent'); //管理员添加一个 学员
             Route::post('/batch','StudentController@createBatchStudent'); //管理员批量添加学员
 
+            Route::put('/info','StudentController@editStudentInfo');//修改学员的信息
+            Route::get('/info','StudentController@getStudentInfo');//获取学员的信息
+
+            Route::get('/img','StudentController@getStudentImg');//获取学员的头像
+            Route::post('/img','StudentController@editStudentImg');//修改学员的头像
+
+            Route::put('/schedule','StudentController@editStudentSchedule');//修改学员的进度
             Route::get('/export','StudentController@exportStudentInfo');//批量导出来
 
 
@@ -73,7 +72,6 @@ Route::group(['prefix'=>'/api/manage'],function (){
 
             Route::get('/img','TrainerController@getTrainerImg');//获取教练的头像
             Route::post('/img','TrainerController@editTrainerImg');//修改教练的头像
-
 
         });
 

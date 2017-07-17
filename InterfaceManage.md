@@ -98,18 +98,18 @@ method: post
 request: 
 ```json
 {
-        "stuName":"required|filled|max:30",
-        "stuIdCard":"required|filled|max:18",
-        "stuTelephone":"required|filled",
-        "stuPermit":"required|filled",
-        "stuQq":"required|filled|numeric",
-        "fieldId":"required|filled|numeric",
-        "classId":"required|filled|numeric",
-        "type":"required|filled",
-        "stuCost":"required|filled|numeric",
+        "stuName":"|max:30",
+        "stuIdCard":"|max:18",
+        "stuTelephone":"",
+        "stuPermit":"",
+        "stuQq":"|numeric",
+        "fieldId":"|numeric",
+        "classId":"|numeric",
+        "type":"",
+        "stuCost":"|numeric",
         "agentId":"required",
         "reduction":"required",
-        "inviter_id":"required|filled",
+        "inviter_id":"",
   
 ```
 
@@ -283,27 +283,23 @@ response:
 <br/>
 学员管理部分
 
-#####  1.增加学员
-url: /api/manage/student
+#####  1. 增加学员
+url: /api/manage/student/one
 
 method: post
 
 request: 
 ```json
 {
-        "stuName":"required|filled|max:30",
-        "stuIdCard":"required|filled|max:18",
-        "stuTelephone":"required|filled",
-        "stuPermit":"required|filled",
-        "stuQq":"required|filled|numeric",
-        "fieldId":"required|filled|numeric",
-        "classId":"required|filled|numeric",
-        "type":"required|filled",
-        "stuCost":"required|filled|numeric",
-        "agentId":"required",
-        "reduction":"required",
-        "inviter_id":"required|filled",
-  
+        "headImg"  :"aqweqw.jpg",
+        "name"     :"zhaoshuai",
+        "age"      :"1996",
+        "sex"      :"男",
+        "idCard"   :"371502199602295336",
+        "telephone":"17865169626",
+        "permit"   :"无",
+        "qq"       :"982599220"
+}
 ```
 
 response:
@@ -314,3 +310,531 @@ response:
 }
 ```
 
+#####  2. 批量增加学员
+url: /api/manage/student/batch
+
+method: post
+
+（excel文件的字段还需和甲方商定好）
+request: 
+```json
+{
+     "schedule":"2",
+     "stuExcel" : 一个cxcel 文件
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "OK"
+}
+```
+
+
+#####  3. 获取学员信息
+url: /api/manage/student/info
+
+method: get
+
+//参数在这里 page 和 rows 是必须的 
+其他的可以再添加  比如说 根据名字查询或者电话查询 
+request: 
+```json
+{
+     "page":"1",
+     "rows" : "10",
+  
+     "name()" : "赵帅",
+     "teltephone()" : "17865169626",
+     "idCard" : "1313131321231",
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 100000000,
+                "headImg": "UxOJPovtuRPVxQD8M5YmtReOot5aWZS38ZpXV2TU.jpeg",
+                "name": "赵二狗",
+                "sex": "男",
+                "age": 21,
+                "idCard": "371502119602295316",
+                "telephone": "17865169626",
+                "qq": 98253222,
+                "permit": "wu",
+                "schedule": 4,
+                "fieldId": 1,
+                "createTime": "2017-07-12 11:41:02",
+                "status": 1
+            },
+            {
+                "id": 100000005,
+                "headImg": null,
+                "name": "赵红帅",
+                "sex": "男",
+                "age": 21,
+                "idCard": "371502199602294976",
+                "telephone": "17865169626",
+                "qq": 982599220,
+                "permit": "自带",
+                "schedule": 19,
+                "fieldId": null,
+                "createTime": "2017-07-12 11:41:02",
+                "status": 1
+            },
+            {
+                "id": 100000006,
+                "headImg": null,
+                "name": "赵红",
+                "sex": "男",
+                "age": 21,
+                "idCard": "371502199602294976",
+                "telephone": "17865169626",
+                "qq": 982599220,
+                "permit": "自带",
+                "schedule": 19,
+                "fieldId": null,
+                "createTime": "2017-07-12 11:41:02",
+                "status": 1
+            }
+        ],
+        "from": 1,
+        "last_page": 2,
+        "next_page_url": "http://localhost/api/manage/student/info?page=2",
+        "path": "http://localhost/api/manage/student/info",
+        "per_page": "3",
+        "prev_page_url": null,
+        "to": 3,
+        "total": 5
+    }
+}
+```
+
+#####  4. 修改学员信息
+url: /api/manage/student/info
+
+method: put
+
+（除了 id 是必须的 其他都可以选  之后的班型  场地 教练等）
+（schedule 是需要批量选择的）
+request: 
+```json
+{
+        "id"       :"2",
+        
+        "headImg"  :"aqweqw.jpg",
+        "name"     :"zhaoshuai",
+        "age"      :"1996",
+        "sex"      :"男",
+        "idCard"   :"371502199602295336",
+        "telephone":"17865169626",
+        "permit"   :"无",
+        "qq"       :"982599220"
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "OK"
+}
+```
+
+#####  5. 上传头像
+url: /api/manage/student/img
+
+method: post
+
+request: 
+```json
+{   
+        "headImg"  : 图片,
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "1iMlGYZEjjMn1K9hq6dhS5KRRKsdQsVaQ9O74C4b.jpeg"
+}
+```
+
+
+#####  6. 获取头像
+url: /api/manage/student/img
+
+method: get
+
+request: 
+```json
+{   
+        "headImg"  : "1iMlGYZEjjMn1K9hq6dhS5KRRKsdQsVaQ9O74C4b.jpeg"
+}
+```
+
+response:
+```json
+返回一个图片资源
+```
+
+
+#####  7. 修改学员进度
+url: /api/manage/student/schedule
+
+method: put
+
+request: 
+```json
+{   
+     "id"  : "100000005,100000006,100000007",
+     "schedule" : "2"
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "OK"
+}
+```
+
+
+
+#####  8. 导出信息
+url: /api/manage/student/export
+
+method: get
+
+传入参数进行导出
+
+request: 
+```json
+{   
+     "startTime"  :"2017-01-01",
+     "endTime"    :"2017-02-01",
+     "id"         :"100000005,100000006,100000007"
+}
+```
+
+response:
+```json
+excel文件
+```
+
+
+<br/>
+<br/>
+教练管理部分
+
+#####  1. 增加教练
+url: /api/manage/trainer/one
+
+method: post
+
+request: 
+```json
+{
+        "headImg"  :"aqweqw.jpg",
+        "name"     :"zhaoshuai",
+        "age"      :"1996",
+        "sex"      :"男",
+        "idCard"   :"371502199602295336",
+        "telephone":"17865169626",
+        "teachYear":"1999",
+        "weixin"   :"982599220"
+        "carNumber":"鲁P88888" 
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "OK"
+}
+```
+
+
+
+#####  2. 获取教练信息
+url: /api/manage/trainer/info
+
+method: get
+
+//参数在这里 page 和 rows 是必须的 
+其他的可以再添加  比如说 根据名字查询或者电话查询 
+request: 
+```json
+{
+     "page":"1",
+     "rows" : "10",
+  
+     "name()" : "赵帅",
+     "teltephone()" : "17865169626",
+     "idCard" : "1313131321231",
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 300000000,
+                "headImg": "1321",
+                "name": "王二",
+                "sex": "女",
+                "age": 51,
+                "teachYear": 18,
+                "carNumber": "京PQ2112",
+                "idCard": "371502196602235663",
+                "telephone": "123123123",
+                "weixin": "123",
+                "classId": 0,
+                "schoolId": 0,
+                "appointmentStatus": 0,
+                "status": 1
+            },
+            {
+                "id": 1,
+                "headImg": "gRPdVoQnQMc5r1dlLdzkkthkb5hHbGvGPCnslESk.jpeg",
+                "name": "李二牛",
+                "sex": "女",
+                "age": 51,
+                "teachYear": 18,
+                "carNumber": "京PQ2112",
+                "idCard": "371502196602235663",
+                "telephone": "123123123",
+                "weixin": "123",
+                "classId": 0,
+                "schoolId": 0,
+                "appointmentStatus": 0,
+                "status": 1
+            }
+        ],
+        "from": 1,
+        "last_page": 1,
+        "next_page_url": null,
+        "path": "http://localhost/api/manage/trainer/info",
+        "per_page": "23",
+        "prev_page_url": null,
+        "to": 2,
+        "total": 2
+    }
+}
+
+```
+
+#####  3. 修改教练信息
+url: /api/manage/trainer/info
+
+method: put
+
+（除了 id 是必须的 其他都可以选  之后的班型  场地 教练等）
+（schedule 是需要批量选择的）
+request: 
+```json
+{
+        "id"       :"2",
+        
+         "headImg"  :"aqweqw.jpg",
+         "name"     :"zhaoshuai",
+         "age"      :"1996",
+         "sex"      :"男",
+         "idCard"   :"371502199602295336",
+         "telephone":"17865169626",
+         "teachYear":"1999",
+         "weixin"   :"982599220"
+         "carNumber":"鲁P88888" 
+
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "OK"
+}
+```
+
+#####  4. 上传头像
+url: /api/manage/trainer/img
+
+method: post
+
+request: 
+```json
+{   
+        "headImg"  : 图片,
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "1iMlGYZEjjMn1K9hq6dhS5KRRKsdQsVaQ9O74C4b.jpeg"
+}
+```
+
+
+#####  5. 获取头像
+url: /api/manage/trainer/img
+
+method: get
+
+request: 
+```json
+{   
+        "headImg"  : "1iMlGYZEjjMn1K9hq6dhS5KRRKsdQsVaQ9O74C4b.jpeg"
+}
+```
+
+response:
+```json
+返回一个图片资源
+```
+
+
+<br/>
+<br/>
+代理管理部分
+
+#####  1.创建一个代理
+
+url: /api/manage/agent/one
+
+method: post
+
+request: 
+```json
+{
+        "name"     :"zhaoshuai",
+        "age"      :"1996",
+        "sex"      :"男",
+        "idCard"   :"371502199602295336",
+        "telephone":"17865169626",
+        "bankCardNumber" :"6216611100002899022",
+        "bankInfo"     :"中国工商银行"
+
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": "OK"
+}
+```
+
+
+
+#####  2. 获取代理信息
+url: /api/manage/agent/info
+
+method: get
+
+//参数在这里 page 和 rows 是必须的 
+其他的可以再添加  比如说 根据名字查询或者电话查询 
+request: 
+```json
+{
+     "page":"1",
+     "rows" : "10",
+  
+     "name()" : "赵帅",
+     "teltephone()" : "17865169626",
+     "idCard" : "1313131321231",
+}
+```
+
+response:
+```json
+{
+    "code": "200",
+    "msg": {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 300000000,
+                "headImg": "1321",
+                "name": "王二",
+                "sex": "女",
+                "age": 51,
+                "teachYear": 18,
+                "carNumber": "京PQ2112",
+                "idCard": "371502196602235663",
+                "telephone": "123123123",
+                "weixin": "123",
+                "classId": 0,
+                "schoolId": 0,
+                "appointmentStatus": 0,
+                "status": 1
+            },
+            {
+                "id": 1,
+                "headImg": "gRPdVoQnQMc5r1dlLdzkkthkb5hHbGvGPCnslESk.jpeg",
+                "name": "李二牛",
+                "sex": "女",
+                "age": 51,
+                "teachYear": 18,
+                "carNumber": "京PQ2112",
+                "idCard": "371502196602235663",
+                "telephone": "123123123",
+                "weixin": "123",
+                "classId": 0,
+                "schoolId": 0,
+                "appointmentStatus": 0,
+                "status": 1
+            }
+        ],
+        "from": 1,
+        "last_page": 1,
+        "next_page_url": null,
+        "path": "http://localhost/api/manage/trainer/info",
+        "per_page": "23",
+        "prev_page_url": null,
+        "to": 2,
+        "total": 2
+    }
+}
+
+```
+
+#####  3. 修改代理信息
+url: /api/manage/agent/info
+
+method: put
+
+（除了 id 是必须的 其他都可以选  之后的班型  场地 教练等）
+（schedule 是需要批量选择的）
+request: 
+```json
+{
+        "id"       :"2",
+        
+         "name"     :"zhaoshuai",
+         "age"      :"1996",
+         "sex"      :"男",
+         "idCard"   :"371502199602295336",
+         "telephone":"17865169626",
+         "bankCardNumber" :"6216611100002899022",
+         "bankInfo"     :"中国工商银行"
+
+}
+```
