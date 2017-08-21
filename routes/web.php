@@ -15,13 +15,19 @@
 /*
  * 引入后台管理的路由文件
  * */
-include "routeManage.php";
+include_once "routeManage.php";
 
+include_once "System.php";
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('model');
 });
 
-Route::get('/test', function () {
-    return 8 & 12 ;
+Route::get('view/{model}/{viewName}/{viewId}', function ($model, $viewName, $viewId) {
+    $menuInfo = new stdClass();
+    $menuInfo->viewId = $viewId;
+
+
+    return view($model . "." . $viewName, ['menuInfo' => $menuInfo]);
 });
+

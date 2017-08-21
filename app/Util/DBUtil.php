@@ -97,9 +97,13 @@ class DBUtil
         return $resultArr;
     }
 
-    static function select($table , $accountId){
+    static function select($table , $accountId = -1){
         //权限验证
         return DB::select($table);
 
+    }
+
+    static function table($table){
+        return DB::table($table);
     }
 }
